@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#sets up your web servers for the deployment
+# sets up your web servers for the deployment
 sudo apt-get update
 sudo apt-get -y install nginx
 echo "Holberton School" | sudo tee /var/www/html/index.html
@@ -14,7 +14,6 @@ mkdir -p /data/web_static/
 mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
-chown -R ubuntu:ubuntu /data/
 echo "<html>
 <head>
 </head>
@@ -24,6 +23,7 @@ echo "<html>
 </html>
 " > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
+chown -R ubuntu:ubuntu /data/
 sed -i "/^\tlocation \/ {$/ i\\\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t\tautoindex off;\n\t}" /etc/nginx/sites-available/default
 nginx -t
 service nginx restart
