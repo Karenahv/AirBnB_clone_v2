@@ -6,7 +6,7 @@ from fabric.api import *
 import os.path
 from os import path
 from datetime import datetime
-from os.path import exists isfile
+from os.path import exists, isfile
 
 
 env.hosts = ['35.237.80.55', '35.231.185.233']
