@@ -6,7 +6,7 @@ from fabric.api import *
 import os.path
 from os import path
 from datetime import datetime
-from os.path import exists
+from os.path import exists isfile
 
 
 env.hosts = ['35.237.80.55', '35.231.185.233']
@@ -15,7 +15,7 @@ env.user = 'ubuntu'
 
 def do_deploy(archive_path):
     """ deploy a file to web servers"""
-    if path.exists(archive_path) is False:
+    if path.exists(archive_path) is False and not isfile(archive_path):
         return False
         try:
             upload = put(archive_path, '/tmp')
@@ -31,6 +31,7 @@ def do_deploy(archive_path):
             run('rm -rf /data/web_static/current')
             run('ln -sf /data/web_static/releases/' + name + '/ ' +
                 '/data/web_static/current')
+            print("New version deployed!")
             return True
         except:
             return False
