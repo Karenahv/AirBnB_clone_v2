@@ -27,25 +27,25 @@ def do_pack():
 
 def do_deploy(archive_path):
     """ deploy a file to web servers"""
-    if path.exists(archive_path) is False and not isfile(archive_path):
+    if path.isfile(archive_path) is False:
         return False
-        try:
-            upload = put(archive_path, '/tmp')
-            name = archive_path.split('/')[1][:-4]
-            run('sudo mkdir -p /data/web_static/releases/' + name + '/')
-            run('tar -xzf /tmp/' + name + '.tgz'
-                ' -C /data/web_static/releases/' + name + '/')
-            run('rm /tmp/' + name + '.tgz')
-            run('mv /data/web_static/releases/' + name + '/web_static/* ' +
-                '/data/web_static/releases/' + name + '/')
-            run('rm -rf /data/web_static/releases/' + name + '/web_static')
-            run('rm -rf /data/web_static/current')
-            run('ln -s /data/web_static/releases/' + name + '/ ' +
-                '/data/web_static/current')
-            print("New version deployed!")
-            return True
-        except:
-            return False
+    try:
+        upload = put(archive_path, '/tmp')
+        name = archive_path.split('/')[1][:-4]
+        run('sudo mkdir -p /data/web_static/releases/' + name + '/')
+        run('tar -xzf /tmp/' + name + '.tgz'
+            ' -C /data/web_static/releases/' + name + '/')
+        run('rm /tmp/' + name + '.tgz')
+        run('mv /data/web_static/releases/' + name + '/web_static/* ' +
+            '/data/web_static/releases/' + name + '/')
+        run('rm -rf /data/web_static/releases/' + name + '/web_static')
+        run('rm -rf /data/web_static/current')
+        run('ln -s /data/web_static/releases/' + name + '/ ' +
+            '/data/web_static/current')
+        print("New version deployed!")
+        return True
+    except:
+        return False
 
 
 def deploy():
@@ -53,5 +53,4 @@ def deploy():
     pathfile = do_pack()
     if pathfile:
         return do_deploy(pathfile)
-    else:
-        return False
+    return False
