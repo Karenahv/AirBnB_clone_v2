@@ -33,7 +33,6 @@ def do_deploy(archive_path):
             upload = put(archive_path, '/tmp')
             name = archive_path.split('/')[1][:-4]
             run('sudo mkdir -p /data/web_static/releases/' + name + '/')
-            run('sudo chown -R ubuntu:ubuntu /data')
             run('tar -xzf /tmp/' + name + '.tgz'
                 ' -C /data/web_static/releases/' + name + '/')
             run('rm /tmp/' + name + '.tgz')
