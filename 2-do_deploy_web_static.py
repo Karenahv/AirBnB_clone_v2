@@ -13,6 +13,18 @@ env.hosts = ['35.237.80.55', '35.231.185.233']
 env.user = 'ubuntu'
 
 
+def do_pack():
+    """ creates tar archive"""
+    if path.exists("versions") is False:
+        local("mkdir versions")
+    date = datetime.now().strftime("%Y%m%d%H%M%S")
+    pathfile = "versions/web_static" + date + ".tgz"
+    local('tar cvfz ' + pathfile + ' web_static')
+    if exists(pathfile):
+        return (pathfile)
+    return None
+
+
 def do_deploy(archive_path):
     """ deploy a file to web servers"""
     if path.exists(archive_path) is False and not isfile(archive_path):
@@ -29,7 +41,7 @@ def do_deploy(archive_path):
                 '/data/web_static/releases/' + name + '/')
             run('rm -rf /data/web_static/releases/' + name + '/web_static')
             run('rm -rf /data/web_static/current')
-            run('ln -sf /data/web_static/releases/' + name + '/ ' +
+            run('ln -s /data/web_static/releases/' + name + '/ ' +
                 '/data/web_static/current')
             print("New version deployed!")
             return True
