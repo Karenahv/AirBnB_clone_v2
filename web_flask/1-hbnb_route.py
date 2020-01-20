@@ -8,17 +8,16 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world(path=None):
+@app.route('/', strict_slashes=False)
+def hello_world():
     """route index"""
     return 'Hello HBNB!'
 
 
-@app.route('/hbnb')
-def hbnb(path=None):
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
     """route index"""
     return 'HBNB'
 
-app.url_map.strict_slashes = False
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
