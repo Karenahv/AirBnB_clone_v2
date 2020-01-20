@@ -16,6 +16,7 @@ def hello_world(path=None):
 
 @app.route('/hbnb')
 def hbnb(path=None):
+    """route index"""
     return 'HBNB'
 
 app.url_map.strict_slashes = False
