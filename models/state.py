@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship, backref
 from os import environ
-
+import models
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -19,10 +19,10 @@ class State(BaseModel, Base):
                               backref="state")
 
     else:
-        lis = []
 
         @property
         def cities(self):
+            lis = []
             stat = self.id
             for k, v in models.storage.all().items():
                 if "City" in k and v.state_id == self.id:
