@@ -33,6 +33,7 @@ class DBStorage():
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
+        """all"""
         dic = {}
         if cls is None:
             for c in self.cla:
@@ -48,16 +49,20 @@ class DBStorage():
         return dic
 
     def new(self, obj):
+        """new"""
         self.__session.add(obj)
 
     def save(self):
+        """save"""
         self.__session.commit()
 
     def delete(self, obj=None):
+        """delete"""
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
+        """reload"""
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(Session)()

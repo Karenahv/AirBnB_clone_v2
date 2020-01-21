@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship, backref
 from os import environ
 import models
 
+
 class State(BaseModel, Base):
     """This is the class for State
     Attributes:
@@ -17,9 +18,7 @@ class State(BaseModel, Base):
     if 'HBNB_TYPE_STORAGE' in environ and environ['HBNB_TYPE_STORAGE'] == 'db':
         cities = relationship('City', cascade="all, delete-orphan",
                               backref="state")
-
     else:
-
         @property
         def cities(self):
             lis = []
