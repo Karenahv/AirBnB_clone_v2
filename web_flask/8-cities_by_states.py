@@ -32,6 +32,7 @@ def cities_ofstate():
 
 @app.teardown_appcontext
 def teardown_db(error):
+    """lists states"""
     storage.close()
 
 if __name__ == '__main__':
