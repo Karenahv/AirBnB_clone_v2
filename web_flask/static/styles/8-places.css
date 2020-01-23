@@ -29,8 +29,8 @@
 }
 
 .title_box h2 {
-    text-align: center;
-    margin: 25px 0px 40px 30%;
+    text-align: left;
+    margin: 25px 0px 40px 0%;
 }
 .price_by_night {
     display: flex;
