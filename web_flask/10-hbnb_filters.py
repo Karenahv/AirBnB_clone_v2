@@ -29,8 +29,9 @@ def filters():
         else:
             cities[city.state_id] = [[city.id, city.name]]
     for k, v in amenity_dict.items():
-       amenities.append(v.name)
-    return render_template('10-hbnb_filters.html', states=states, cities=cities,
+        amenities.append(v.name)
+    return render_template('10-hbnb_filters.html',
+                           states=states, cities=cities,
                            amenities=amenities)
 
 
